@@ -16,7 +16,7 @@ public class Driver extends User{
 		for (String area : favouriteArea) {
 			
 			if (area.equals(favouriteArea))
-				System.out.println("");
+				System.out.println(""); //there is logic error in this method
 		}
 	}
 	public void addArea(String Area) {
