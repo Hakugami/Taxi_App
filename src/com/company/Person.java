@@ -14,15 +14,7 @@ public class Person {
     public Person() {
 
     }
-    public void login(String email, String password) {
-    		if (this.Email.equals(email) && this.password.equals(password)){
-        		System.out.println("Login successful");
-        	
-    		}
-    		else {
-    			System.out.println("Wrong email or password please try again");	
-            }
-     }
+  
     	
 
     public String getUserName() {
