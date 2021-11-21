@@ -1,13 +1,13 @@
 package com.company;
 public class Ride {
 	String source;
-	String distination;
+	String destination;
 	double price;
 	User user;
 	Driver driver;
-	public Ride(String source, String distination, User user) {
+	public Ride(String source, String destination, User user) {
 		this.source = source;
-		this.distination = distination;
+		this.destination = destination;
 		this.user = user;
 	}
 	public Ride(String source) {
@@ -22,11 +22,11 @@ public class Ride {
 	public void setSource(String source) {
 		this.source = source;
 	}
-	public String getDistination() {
-		return distination;
+	public String getDestination() {
+		return destination;
 	}
-	public void setDistination(String distination) {
-		this.distination = distination;
+	public void setDestination(String destination) {
+		this.destination = destination;
 	}
 	public double getPrice() {
 		return price;

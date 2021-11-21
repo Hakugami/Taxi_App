@@ -48,11 +48,12 @@ public class  Database {
 
 
     public static boolean addDriver(Driver driver){
-        if(allUsers.contains(driver)){
+        if(allDrivers.contains(driver)){
             System.out.println("This driver already exists");
             return false;
         }
         else{
+            allDrivers.add(driver);
             allUsers.add(driver);
             System.out.println("Driver has been added successfully");
             return true;
@@ -84,5 +85,6 @@ public class  Database {
     public static ArrayList<Driver> getDriversRequests() {
         return driversRequests;
     }
+
 
 }

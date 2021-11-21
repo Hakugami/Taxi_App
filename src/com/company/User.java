@@ -9,14 +9,15 @@ public abstract class User extends Person {
     }
 
 
-    public boolean register(String user,String pass,String Email){
+    public boolean register(String user, String pass, String Email){
         this.setUserName(user);
         this.setPassword(pass);
         this.setEmail(Email);
-
-        Database.addUser(this);
-
+        if (!(this instanceof Driver)) {
+            Database.addUser(this);
+        }
         return true;
+
     }
 
     public boolean login(String username, String pass){

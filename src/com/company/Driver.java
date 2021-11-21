@@ -9,6 +9,25 @@ public class Driver extends User{
 	private double rate;
 	private static ArrayList<String> favouriteArea = new ArrayList<>();
 	private static ArrayList<Rate> allRating = new ArrayList<>();
+	private boolean isSuspended=false;
+
+	public boolean isSuspended() {
+		return isSuspended;
+	}
+
+	public void setSuspended(boolean suspended) {
+		isSuspended = suspended;
+	}
+
+	public boolean register(String user, String pass, String Email, int id, String licence){
+		this.register(user,pass,Email);
+		this.id=id;
+		this.licence=licence;
+		Admin.getDriversRequests(this);
+		return true;
+	}
+
+
 	public void listRides() {
 		
 	}
@@ -71,5 +90,18 @@ public class Driver extends User{
 		}
 		System.out.println(r/allRating.size());
 	}
-		
+
+	@Override
+	public String toString() {
+		return "Driver{" +
+				"id=" + id +
+				", licence='" + licence + '\'' +
+				", rate=" + rate +
+				", isSuspended=" + isSuspended +
+				", userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", Email='" + Email + '\'' +
+				", active=" + active +
+				'}';
+	}
 }
