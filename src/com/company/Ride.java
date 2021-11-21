@@ -3,18 +3,26 @@ public class Ride {
 	String source;
 	String destination;
 	double price;
-	User user;
+	Customer customer;
 	Driver driver;
-	public Ride(String source, String destination, User user) {
+	public Ride(String source, String destination, Customer customer) {
 		this.source = source;
 		this.destination = destination;
-		this.user = user;
+		this.customer = customer;
+		
+	}
+	public Ride(String source, String destination, Customer customer,Driver driver) {
+		this.source = source;
+		this.destination = destination;
+		this.customer = customer;
+		this.driver=driver;
 	}
 	public Ride(String source) {
 		this.source=source;
 	}
+	
 	public void listAllRides(String area) {
-		
+		System.out.println(Database.getAllRides());
 	}
 	public String getSource() {
 		return source;
