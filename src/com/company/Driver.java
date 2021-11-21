@@ -7,10 +7,20 @@ public class Driver extends User{
 	private int id;
 	private String licence;
 	private double rate;
-	public static ArrayList<String> favouriteArea = new ArrayList<>();
-	public static ArrayList<Rate> allRating = new ArrayList<>();
-	public static ArrayList<Ride> driverRides = new ArrayList<>();
+	public  ArrayList<String> favouriteArea = new ArrayList<>();
+	public  ArrayList<Rate> allRating = new ArrayList<>();
+
+	public void setDriverRide(Ride driverRide) {
+		this.driverRide = driverRide;
+	}
+
+	public  Ride driverRide;// useless for now
 	public boolean isSuspended=false;
+
+
+	public void chooseRide(){
+		//filter area depending on fav area and offer an offer and register it in the database
+	}
 
 	public boolean isSuspended() {
 		return isSuspended;
@@ -29,19 +39,19 @@ public class Driver extends User{
 	}
 
 	public void addRide(Ride r) {
-		driverRides.add(r);
+		driverRide =r;
 	}
-	public void listAllPreviousRides() {
-		for (Ride ride:driverRides) {
-			System.out.println(ride.getSource()+"   "+ride.getDestination()+"   "+ride.getPrice());
-		}
-	}
+//	public void listAllPreviousRides() {
+//		for (Ride ride:driverRides) {
+////			System.out.println(ride.getSource()+"   "+ride.getDestination()+"   "+ride.getPrice());
+//		}
+//	}
 	public void listRidesWithSourceArea() {
 		for (String area : favouriteArea) {
 			for (Ride r : Database.getAllRides())
 				if (area.equals(r.source)) {
-					System.out.println(r.source+"   "+r.destination+"   "+r.price);
-					System.out.println(Database.getUser(r.customer.userName,r.customer.Email));
+//					System.out.println(r.source+"   "+r.destination+"   "+r.price);
+//					System.out.println(Database.getUser(r.customer.userName,r.customer.Email));
 			}
 		}
 	}

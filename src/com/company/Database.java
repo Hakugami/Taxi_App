@@ -16,10 +16,18 @@ public class  Database {
             if(user1.getUserName().equals(user)&&user1.getPassword().equals(pass)){
                 System.out.println("You have logged in successfully");
                 user1.setActive(true);
+
                 return true;
             }
         }
         System.out.println("User does not exist");
+        return false;
+    }
+
+    public static boolean verifyDriver(String user,String pass){
+        for(Driver driver:allDrivers){
+
+        }
         return false;
     }
 
@@ -69,6 +77,10 @@ public class  Database {
         }
         return allUsers.get(0);
     }
+
+
+
+
 
     public static ArrayList<User> getAllUsers() {
         return allUsers;

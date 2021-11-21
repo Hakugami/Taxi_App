@@ -1,10 +1,16 @@
 package com.company;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Ride {
 	String source;
 	String destination;
-	double price;
-	Customer customer;
-	Driver driver;
+	private Customer customer;
+	private ArrayList<Offer> offers=new ArrayList<>();
+	private Offer selectedOffer;
+
+
 	public Ride(String source, String destination, Customer customer) {
 		this.source = source;
 		this.destination = destination;
@@ -15,7 +21,7 @@ public class Ride {
 		this.source = source;
 		this.destination = destination;
 		this.customer = customer;
-		this.driver=driver;
+
 	}
 	public Ride(String source) {
 		this.source=source;
@@ -36,11 +42,17 @@ public class Ride {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	public double getPrice() {
-		return price;
+
+	public void listOffers(){
+		for (int i = 0; i < offers.size(); i++) {
+			System.out.println(i+1+"-"+offers.get(i));
+		}
 	}
-	public void setPrice(double price) {
-		this.price = price;
-	
+	public void getOffer(int selectOffer){
+		selectedOffer= offers.get(selectOffer-1);
+		offers.get(selectOffer-1).getDriver().setDriverRide(this);
+		Database.getAllRides().remove(this);
+
 	}
+
 }

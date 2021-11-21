@@ -9,7 +9,6 @@ public class Admin extends Person {
     public static void getDriversRequests(Driver driver){
         allRequests.add(driver);
     }
-
     public boolean reviewRequests(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("all the current requests : \n"+allRequests.toString());
