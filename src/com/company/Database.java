@@ -19,6 +19,9 @@ public class  Database {
 
                 return true;
             }
+            else{
+                return verifyDriver(user,pass);
+            }
         }
         System.out.println("User does not exist");
         return false;
@@ -26,7 +29,12 @@ public class  Database {
 
     public static boolean verifyDriver(String user,String pass){
         for(Driver driver:allDrivers){
+            if(driver.getUserName().equals(user)&&driver.getPassword().equals(pass)){
+                System.out.println("You have logged in successfully");
+                driver.setActive(true);
 
+                return true;
+            }
         }
         return false;
     }
