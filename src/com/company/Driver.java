@@ -7,9 +7,10 @@ public class Driver extends User{
 	private int id;
 	private String licence;
 	private double rate;
-	private static ArrayList<String> favouriteArea = new ArrayList<>();
-	private static ArrayList<Rate> allRating = new ArrayList<>();
-	private boolean isSuspended=false;
+	public static ArrayList<String> favouriteArea = new ArrayList<>();
+	public static ArrayList<Rate> allRating = new ArrayList<>();
+	public static ArrayList<Ride> driverRides = new ArrayList<>();
+	public boolean isSuspended=false;
 
 	public boolean isSuspended() {
 		return isSuspended;
@@ -27,20 +28,27 @@ public class Driver extends User{
 		return true;
 	}
 
-
-	public void listRides() {
-		
+	public void addRide(Ride r) {
+		driverRides.add(r);
 	}
-	public void listRides(String Area) {
-		for (String area : favouriteArea) {
-			
-			if (area.equals(favouriteArea))
-				System.out.println(""); //there is logic error in this method
+	public void listAllPreviousRides() {
+		for (Ride ride:driverRides) {
+			System.out.println(ride.getSource()+"   "+ride.getDestination()+"   "+ride.getPrice());
 		}
 	}
+	public void listRidesWithSourceArea() {
+		for (String area : favouriteArea) {
+			for (Ride r : Database.getAllRides())
+				if (area.equals(r.source)) {
+					System.out.println(r.source+"   "+r.destination+"   "+r.price);
+					System.out.println(Database.getUser(r.customer.userName,r.customer.Email));
+			}
+		}
+	}
+	
+	
 	public void addArea(String Area) {
 		favouriteArea.add(Area);              //add area to the fav areas
-		Ride r=new Ride(Area);           //keep this area as source 
 	}
 	public void offer(double price) {
 		
@@ -99,7 +107,6 @@ public class Driver extends User{
 				", rate=" + rate +
 				", isSuspended=" + isSuspended +
 				", userName='" + userName + '\'' +
-				", password='" + password + '\'' +
 				", Email='" + Email + '\'' +
 				", active=" + active +
 				'}';
