@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Admin extends Person {
@@ -13,9 +14,9 @@ public class Admin extends Person {
         Scanner scanner=new Scanner(System.in);
         System.out.println("all the current requests : \n"+allRequests.toString());
         System.out.println("Please enter the ID of the driver you wish to select");
-        int selectDriver=scanner.nextInt();
+        String selectDriver=scanner.nextLine();
         for(int i=0;i<allRequests.size();i++){
-            if(allRequests.get(i).getId()==selectDriver){
+            if(Objects.equals(allRequests.get(i).getId(), selectDriver)){
                 System.out.println("1-Accept request\n2-Deny request");
                 int choice=scanner.nextInt();
                 switch (choice) {
@@ -45,15 +46,35 @@ public class Admin extends Person {
 
     public void suspend(){
         Scanner scanner=new Scanner(System.in);
-        System.out.println("Suspension : \n"+Database.getAllDrivers().toString());
-        System.out.println("Please enter the ID of the driver you wish to select");
-        int selectDriver=scanner.nextInt();
-        for(Driver driver:Database.getAllDrivers()){
-            if(driver.getId()==selectDriver){
-                driver.setSuspended(true);
-                System.out.println(driver.getUserName()+" has been suspended");
-                break;
+        Scanner scannerInt=new Scanner(System.in);
+        System.out.println("1-Suspend Driver\n2-Suspend Customer");
+        int choice= scannerInt.nextInt();
+        switch (choice) {
+            case 1 -> {
+                System.out.println("Suspension : \n" + Database.getAllDrivers().toString());
+                System.out.println("Please enter the ID of the driver you wish to select");
+                String select = scanner.nextLine();
+                for (Driver driver : Database.getAllDrivers()) {
+                    if (Objects.equals(driver.getId(), select)) {
+                        driver.setActive(false);
+                        System.out.println(driver.getUserName() + " has been suspended");
+                        break;
+                    }
+                }
+            }
+            case 2 -> {
+                System.out.println("Suspension : \n" + Database.getAllUsers().toString());
+                System.out.println("Please enter the Username of the Customer you wish to select");
+                String select = scanner.nextLine();
+                for (Customer customer : Database.getAllUsers()) {
+                    if (Objects.equals(customer.getUserName(), select)) {
+                        customer.setActive(false);
+                        System.out.println(customer.getUserName() + " has been suspended");
+                        break;
+                    }
+                }
             }
         }
+
     }
 }

@@ -4,28 +4,26 @@ import java.util.ArrayList;
 
 
 public class Driver extends User{
-	private int id;
-	private String licence;
-	public double rate;
-	public ArrayList<String> favouriteArea = new ArrayList<>();
-	public ArrayList<Rate> allRating = new ArrayList<>();
+	protected String id;
+	protected String licence;
+	protected double rate;
+	protected ArrayList<String> favouriteArea = new ArrayList<>();
+	protected ArrayList<Rate> allRating = new ArrayList<>();
+	protected Ride driverRide;
 
 	public void setDriverRide(Ride driverRide) {
 		this.driverRide = driverRide;
 	}
 
-	public  Ride driverRide;
-	public boolean isSuspended=false;
 
 
 	public void chooseRide(){
 		//filter area depending on fav area and offer an offer and register it in the database
 		for (String area : favouriteArea) {
-			for(Ride ride : Database.allRides) {
-				if(ride.source.equals(area)){
+			for(Ride ride : Database.getAllRides()) {
+				if(ride.getSource().equals(area)){
 					driverRide=ride;
-					setOffer(driverRide, driverRide.selectedOffer.getPrice());
-					Database.allRides.add(driverRide);
+					setOffer(driverRide, driverRide.getSelectedOffer().getPrice());
 				}
 			}
 		}
@@ -33,20 +31,13 @@ public class Driver extends User{
 	}
 	public void setOffer(Ride ride,double price) {
 		Offer offer = new Offer(this, price);
-		ride.offers.add(offer);
+		ride.getOffers().add(offer);
 	}
-	public boolean isSuspended() {
-		return isSuspended;
-	}
-
-	public void setSuspended(boolean suspended) {
-		isSuspended = suspended;
-	}
-
-	public boolean register(String user, String pass, String Email, int id, String licence){
-		this.register(user,pass,Email);
+	public boolean register(String user, String pass, String Email,String phone,String id, String licence){
+		this.register(user,pass,Email,phone);
 		this.id=id;
 		this.licence=licence;
+		System.out.println("Pending approval");
 		Admin.getDriversRequests(this);
 		return true;
 	}
@@ -54,15 +45,11 @@ public class Driver extends User{
 	public void addRide(Ride r) {
 		driverRide =r;
 	}
-//	public void listAllPreviousRides() {
-//		for (Ride ride:driverRides) {
-////			System.out.println(ride.getSource()+"   "+ride.getDestination()+"   "+ride.getPrice());
-//		}
-//	}
+
 	public void listRidesWithSourceArea() {
 		for (String area : favouriteArea) {
-			for (Ride r : Database.allRides)
-				if (area.equals(r.source)) {
+			for (Ride r : Database.getAllRides())
+				if (area.equals(r.getSource())) {
 //					System.out.println(r.source+"   "+r.destination+"   "+r.price);
 //					System.out.println(Database.getUser(r.customer.userName,r.customer.Email));
 			}
@@ -76,12 +63,31 @@ public class Driver extends User{
 	public void offer(double price) {
 		
 	}
-	public void setId(int id) {
-		this.id=id;
-	}
-	public int getId() {
+
+	public String getId() {
 		return id;
 	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setRate(double rate) {
+		this.rate = rate;
+	}
+
+	public void setFavouriteArea(ArrayList<String> favouriteArea) {
+		this.favouriteArea = favouriteArea;
+	}
+
+	public void setAllRating(ArrayList<Rate> allRating) {
+		this.allRating = allRating;
+	}
+
+	public Ride getDriverRide() {
+		return driverRide;
+	}
+
 	public void setLicence(String licence) {
 		this.licence=licence;
 	}
@@ -125,12 +131,16 @@ public class Driver extends User{
 	@Override
 	public String toString() {
 		return "Driver{" +
-				"id=" + id +
+				"id='" + id + '\'' +
 				", licence='" + licence + '\'' +
 				", rate=" + rate +
-				", isSuspended=" + isSuspended +
+				", favouriteArea=" + favouriteArea +
+				", allRating=" + allRating +
+				", driverRide=" + driverRide +
 				", userName='" + userName + '\'' +
+				", password='" + password + '\'' +
 				", Email='" + Email + '\'' +
+				", phone='" + phone + '\'' +
 				", active=" + active +
 				'}';
 	}

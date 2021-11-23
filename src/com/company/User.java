@@ -2,19 +2,20 @@ package com.company;
 
 public abstract class User extends Person {
 
-    public boolean active;
+    public boolean active=true;
 
     public User() {
         super();
     }
 
 
-    public boolean register(String user, String pass, String Email){
+    public boolean register(String user, String pass, String Email,String phone){
         this.setUserName(user);
         this.setPassword(pass);
         this.setEmail(Email);
+        this.setPhone(phone);
         if (!(this instanceof Driver)) {
-            Database.addUser(this);
+            Database.addUser((Customer) this);
         }
         return true;
 

@@ -1,15 +1,33 @@
 package com.company;
 
 public class Person {
-    public String userName;
-    public String password;
-    public String Email;
+    protected String userName;
+    protected String password;
+    protected String Email;
+    protected String phone;
 
-    public Person(String userName, String password, String email) {
+    public Person(String userName, String password, String email, String phone) {
         this.userName = userName;
         this.password = password;
         Email = email;
+        this.phone = phone;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Person(String userName, String password, String phone){
+        this.userName=userName;
+        this.password=password;
+        this.phone=phone;
+        this.Email="";
+    }
+
 
     public Person() {
 

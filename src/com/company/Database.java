@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class  Database {
 
-    public static ArrayList<User> allUsers=new ArrayList<>();
-    public static ArrayList<Driver> allDrivers= new ArrayList<>();
-    public static  ArrayList<Ride> allRides=new ArrayList<>();
-    public static ArrayList<Driver> driversRequests=new ArrayList<>();
+    private static final ArrayList<Customer> allUsers=new ArrayList<>();
+    private static final ArrayList<Driver> allDrivers= new ArrayList<>();
+    private static final ArrayList<Ride> allRides=new ArrayList<>();
+    private static final ArrayList<Driver> driversRequests=new ArrayList<>();
 
 
 
@@ -15,15 +15,10 @@ public class  Database {
         for (User user1:allUsers) {
             if(user1.getUserName().equals(user)&&user1.getPassword().equals(pass)){
                 System.out.println("You have logged in successfully");
-                user1.setActive(true);
 
                 return true;
             }
-            else{
-                return verifyDriver(user,pass);
-            }
         }
-        System.out.println("User does not exist");
         return false;
     }
 
@@ -31,7 +26,6 @@ public class  Database {
         for(Driver driver:allDrivers){
             if(driver.getUserName().equals(user)&&driver.getPassword().equals(pass)){
                 System.out.println("You have logged in successfully");
-                driver.setActive(true);
 
                 return true;
             }
@@ -40,7 +34,7 @@ public class  Database {
     }
 
 
-    public static boolean addUser(User user){
+    public static boolean addUser(Customer user){
         if(allUsers.contains(user)){
             System.out.println("This user already exists");
             return false;
@@ -53,13 +47,13 @@ public class  Database {
     }
 
 
-    public static User getUser(String user,String Email){
-        for (User user1:allUsers){
-            if(user1.getUserName().equals(user)||user1.getEmail().equals(Email)){
+    public static Customer getUser(String user,String pass){
+        for (Customer user1:allUsers){
+            if(user1.getUserName().equals(user)||user1.getPassword().equals(pass)){
                 return user1;
             }
         }
-        return allUsers.get(0);
+        return null;
     }
 
 
@@ -70,27 +64,26 @@ public class  Database {
         }
         else{
             allDrivers.add(driver);
-            allUsers.add(driver);
             System.out.println("Driver has been added successfully");
             return true;
         }
     }
 
 
-    public static User getDriver(String user,String Email){
+    public static Driver getDriver(String user,String pass){
         for (Driver driver:allDrivers){
-            if(driver.getUserName().equals(user)||driver.getEmail().equals(Email)){
+            if(driver.getUserName().equals(user)&&driver.getPassword().equals(pass)){
                 return driver;
             }
         }
-        return allUsers.get(0);
+        return null;
     }
 
 
 
 
 
-    public static ArrayList<User> getAllUsers() {
+    public static ArrayList<Customer> getAllUsers() {
         return allUsers;
     }
 

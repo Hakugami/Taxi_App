@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ride {
-	String source;
-	String destination;
-	public Customer customer;
-	public ArrayList<Offer> offers=new ArrayList<>();
-	public Offer selectedOffer;
+	private String source;
+	private String destination;
+	private Customer customer;
+	private ArrayList<Offer> offers=new ArrayList<>();
+	private Offer selectedOffer;
 
 
 	public Ride(String source, String destination, Customer customer) {
@@ -39,13 +39,45 @@ public class Ride {
 	public String getDestination() {
 		return destination;
 	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public ArrayList<Offer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(ArrayList<Offer> offers) {
+		this.offers = offers;
+	}
+
+	public Offer getSelectedOffer() {
+		return selectedOffer;
+	}
+
+	public void setSelectedOffer(Offer selectedOffer) {
+		this.selectedOffer = selectedOffer;
+	}
+
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
 
-	public void listOffers(){
-		for (int i = 0; i < offers.size(); i++) {
-			System.out.println(i+1+"-"+offers.get(i));
+	public boolean listOffers(){
+		if (offers.size()==0){
+			System.out.println("There are currently no offers");
+			return false;
+		}
+		else{
+			for (int i = 0; i < offers.size(); i++) {
+				System.out.println(i+1+"-"+offers.get(i));
+			}
+			return true;
 		}
 	}
 	public void getOffer(int selectOffer){

@@ -1,8 +1,8 @@
 package com.company;
 
 public class Rate {
-	String username;
-	double rate;
+	private String username;
+	private double rate;
 	public Rate(String username, double rate) {
 		this.username = username;
 		this.rate = rate;
