@@ -6,9 +6,9 @@ import java.util.Scanner;
 public class Ride {
 	String source;
 	String destination;
-	private Customer customer;
-	private ArrayList<Offer> offers=new ArrayList<>();
-	private Offer selectedOffer;
+	public Customer customer;
+	public ArrayList<Offer> offers=new ArrayList<>();
+	public Offer selectedOffer;
 
 
 	public Ride(String source, String destination, Customer customer) {
