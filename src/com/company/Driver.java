@@ -6,22 +6,35 @@ import java.util.ArrayList;
 public class Driver extends User{
 	private int id;
 	private String licence;
-	private double rate;
-	public  ArrayList<String> favouriteArea = new ArrayList<>();
-	public  ArrayList<Rate> allRating = new ArrayList<>();
+	public double rate;
+	public ArrayList<String> favouriteArea = new ArrayList<>();
+	public ArrayList<Rate> allRating = new ArrayList<>();
 
 	public void setDriverRide(Ride driverRide) {
 		this.driverRide = driverRide;
 	}
 
-	public  Ride driverRide;// useless for now
+	public  Ride driverRide;
 	public boolean isSuspended=false;
 
 
 	public void chooseRide(){
 		//filter area depending on fav area and offer an offer and register it in the database
-	}
+		for (String area : favouriteArea) {
+			for(Ride ride : Database.allRides) {
+				if(ride.source.equals(area)){
+					driverRide=ride;
+					setOffer(driverRide, driverRide.selectedOffer.getPrice());
+					Database.allRides.add(driverRide);
+				}
+			}
+		}
 
+	}
+	public void setOffer(Ride ride,double price) {
+		Offer offer = new Offer(this, price);
+		ride.offers.add(offer);
+	}
 	public boolean isSuspended() {
 		return isSuspended;
 	}
@@ -48,7 +61,7 @@ public class Driver extends User{
 //	}
 	public void listRidesWithSourceArea() {
 		for (String area : favouriteArea) {
-			for (Ride r : Database.getAllRides())
+			for (Ride r : Database.allRides)
 				if (area.equals(r.source)) {
 //					System.out.println(r.source+"   "+r.destination+"   "+r.price);
 //					System.out.println(Database.getUser(r.customer.userName,r.customer.Email));
