@@ -4,8 +4,14 @@ public class Offer {
     private Driver driver;
     private double price;
     private String Details;
+    
+    
+    public Offer(Driver driver, double price) {
+		this.driver = driver;
+		this.price = price;
+	}
 
-    public Driver getDriver() {
+	public Driver getDriver() {
         return driver;
     }
 
