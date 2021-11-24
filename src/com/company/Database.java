@@ -24,7 +24,7 @@ public class  Database {
 
     public static boolean verifyDriver(String user,String pass){
         for(Driver driver:allDrivers){
-            if(driver.getUserName().equals(user)&&driver.getPassword().equals(pass)){
+            if(driver.getUserName().equals(user) && driver.getPassword().equals(pass)){
                 System.out.println("You have logged in successfully");
 
                 return true;
@@ -55,7 +55,13 @@ public class  Database {
         }
         return null;
     }
-
+    public static void getUserBySource(String source) {
+    	for (Ride ride:allRides){
+            if(ride.getSource().equals(source)){
+            	System.out.println("Customer: "+ride.getCustomer().userName+"    "+ride.getCustomer().Email);
+            }
+    	}
+     }
 
     public static boolean addDriver(Driver driver){
         if(allDrivers.contains(driver)){
