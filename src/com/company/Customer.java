@@ -13,6 +13,7 @@ public class Customer extends User {
 		myRide=r;// added this to see his ride
 
     }
+    
     public void chooseOffer(){
 			Scanner input=new Scanner(System.in);
 			if(myRide.listOffers()) {
@@ -28,7 +29,8 @@ public class Customer extends User {
     public void addRate(double rate,String name){
     	for (Driver driver: Database.getAllDrivers()) {
     		if(driver.userName.equals(name)) {
-    			driver.setRate(driver.userName, rate);
+    			Rate customerRate=new Rate(name, rate);
+    			driver.setRate(customerRate);
     		}
     	}
     }
