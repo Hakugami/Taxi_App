@@ -6,14 +6,14 @@ public class Main {
 
     public static void main(String[] args) {
         while (true) {
-            System.out.println("Welcome to our taxi app");
+            System.out.println("\nWelcome to our taxi app\n---------------------------\n");
             Driver driver = new Driver();
             Customer customer = new Customer();
             Admin admin =new Admin();
             Scanner scannerInt = new Scanner(System.in);
             Scanner scannerStr = new Scanner(System.in);
             Scanner scannerDoub = new Scanner(System.in);
-            System.out.println("1-Register as a Customer\n2-Register as a driver\n3-log in\n4-admin panel");
+            System.out.println("1-Register as a Customer\n2-Register as a driver\n3-log in\n4-admin panel\n5-exit");
             int choice = scannerInt.nextInt();
             switch (choice) {
                 case 1 -> {
@@ -58,8 +58,12 @@ public class Main {
                         if (type == 1) {
                             Customer customer1 = Database.getUser(Username, Password);
                             int choiceC=0;
-                            while(choiceC!=3){
-                            	System.out.println("1-Request a ride\n2-View current offers\n3-Logout");
+                            while(choiceC!=4){
+                                if(!customer1.isActive()){
+                                    System.out.println("You are currently suspended");
+                                    break;
+                                }
+                            	System.out.println("1-Request a ride\n2-View current offers\n3-rate a driver\n4-Logout");
                             	choiceC = scannerInt.nextInt();
                             	assert customer1 != null;
                             	switch (choiceC) {
@@ -73,6 +77,17 @@ public class Main {
                             		case 2 -> {
                             			customer1.chooseOffer();
                                 }
+                                    case 3 ->{
+                                        System.out.println("Rate your latest driver");
+                                        System.out.println("Enter rating");
+                                        double rate= scannerDoub.nextDouble();
+                                        try{
+                                            customer1.addRate(rate);
+                                        }
+                                        catch (Exception e){
+                                            System.out.println("No selected rides\n");
+                                        }
+                                }
                             }
 
                             }
@@ -81,6 +96,10 @@ public class Main {
                             Driver driver1 = Database.getDriver(Username, Password);
                             int choiceD = 0;
                             while (choiceD != 6) { //not equal the log-out number choice
+                                if(!driver1.isActive()){
+                                    System.out.println("You are currently suspended");
+                                    break;
+                                }
                                 System.out.println("1-Search for a ride");
                                 System.out.println("2-View current ride");
                                 System.out.println("3-View all rating & average rating");
@@ -99,14 +118,14 @@ public class Main {
                             			}
                             			else
                             				System.out.println("There is no requests in your fav areas");
-                            			
+
                             		}
                             		case 2 -> {
                             			try {
-                            			System.out.println(driver1.getDriverRide().getSource()+"    "+driver1.getDriverRide().getDestination());
-                            			System.out.println(driver1.getDriverRide().getCustomer().userName);
-                            			System.out.println(driver1.getDriverRide().getPrice()); //There is error in this line 
-                                    
+                            			System.out.println(driver1.getDriverRide().getSource()+"-------->"+driver1.getDriverRide().getDestination());
+                            			System.out.println(driver1.getDriverRide().getCustomer().getUserName());
+                            			System.out.println(driver1.getDriverRide().getPrice(driver1.getUserName())); //There is error in this line
+
                             			}
                             			catch (Exception e) {
                             				System.out.println("Error");
@@ -125,8 +144,8 @@ public class Main {
                             		case 5 -> {
                             			driver1.getFavouriteArea();
                             		}
-                            		
-                            			
+
+
                             	}
 
                             }
@@ -147,6 +166,9 @@ public class Main {
                             case 2 -> admin.suspend();
                         }
                     }
+                }
+                case 5 ->{
+                    System.exit(0);
                 }
             }
         }

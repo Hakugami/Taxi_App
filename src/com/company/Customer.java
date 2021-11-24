@@ -26,12 +26,27 @@ public class Customer extends User {
 				myRide.getOffer(choice);
 			}
     }
-    public void addRate(double rate,String name){
-    	for (Driver driver: Database.getAllDrivers()) {
-    		if(driver.userName.equals(name)) {
-    			Rate customerRate=new Rate(name, rate);
-    			driver.setRate(customerRate);
-    		}
-    	}
+    public void addRate(double rate){
+			Rate customerRate= null;
+			if (myRide.getSelectedOffer() != null) {
+				customerRate = new Rate(myRide.getSelectedOffer().getDriver().getUserName(), rate);
+				myRide.getSelectedOffer().getDriver().setRate(customerRate);
+			}
+			else {
+				System.out.println("No recent rides");
+			}
+
     }
+
+	@Override
+	public String toString() {
+		return "Customer{" +
+				"myRide=" + myRide +
+				", userName='" + userName + '\'' +
+				", password='" + password + '\'' +
+				", Email='" + Email + '\'' +
+				", phone='" + phone + '\'' +
+				", active=" + active +
+				'}';
+	}
 }

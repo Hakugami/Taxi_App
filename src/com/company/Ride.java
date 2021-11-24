@@ -59,8 +59,13 @@ public class Ride {
 	public Offer getSelectedOffer() {
 		return selectedOffer;
 	}
-	public double getPrice() {
-		return selectedOffer.getPrice();
+	public double getPrice(String driverName) {
+		for (Offer offer:offers){
+			if(offer.getDriver().getUserName().equals(driverName)){
+				return offer.getPrice();
+			}
+		}
+		return -1;
 	}
 	public void setSelectedOffer(Offer selectedOffer) {
 		this.selectedOffer = selectedOffer;
@@ -86,6 +91,7 @@ public class Ride {
 		selectedOffer= offers.get(selectOffer-1);
 		offers.get(selectOffer-1).getDriver().setDriverRide(this);
 		Database.getAllRides().remove(this);
+		offers.remove(selectOffer-1);
 
 	}
 

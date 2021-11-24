@@ -11,7 +11,9 @@ public class Driver extends User{
 	protected ArrayList<String> favouriteArea = new ArrayList<>();
 	protected ArrayList<Rate> allRating = new ArrayList<>();
 	protected Ride driverRide = null;
-	public static int ridesCounter = 0;
+	protected static int ridesCounter = 0;
+
+
 	public void setDriverRide(Ride driverRide) {
 		this.driverRide = driverRide;
 	}
