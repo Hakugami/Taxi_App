@@ -59,7 +59,9 @@ public class Ride {
 	public Offer getSelectedOffer() {
 		return selectedOffer;
 	}
-
+	public double getPrice() {
+		return selectedOffer.getPrice();
+	}
 	public void setSelectedOffer(Offer selectedOffer) {
 		this.selectedOffer = selectedOffer;
 	}
