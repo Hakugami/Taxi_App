@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Driver extends User{
@@ -9,24 +10,25 @@ public class Driver extends User{
 	protected double rate;
 	protected ArrayList<String> favouriteArea = new ArrayList<>();
 	protected ArrayList<Rate> allRating = new ArrayList<>();
-	protected Ride driverRide;
-
+	protected Ride driverRide = null;
+	public static int ridesCounter = 0;
 	public void setDriverRide(Ride driverRide) {
 		this.driverRide = driverRide;
 	}
 
 
 
-	public void chooseRide(){
+	public Ride chooseRide(){
 		//filter area depending on fav area and offer an offer and register it in the database
 		for (String area : favouriteArea) {
 			for(Ride ride : Database.getAllRides()) {
 				if(ride.getSource().equals(area)){
 					driverRide=ride;
-					setOffer(driverRide, driverRide.getSelectedOffer().getPrice());
+					return driverRide;
 				}
 			}
 		}
+		return driverRide;
 
 	}
 	public void setOffer(Ride ride,double price) {
@@ -46,13 +48,21 @@ public class Driver extends User{
 		driverRide =r;
 	}
 
-	public void listRidesWithSourceArea() {
+	public boolean listRidesWithSourceArea() {
+		ridesCounter=0;
 		for (String area : favouriteArea) {
 			for (Ride r : Database.getAllRides())
 				if (area.equals(r.getSource())) {
-//					System.out.println(r.source+"   "+r.destination+"   "+r.price);
-//					System.out.println(Database.getUser(r.customer.userName,r.customer.Email));
-			}
+				System.out.println("Source: "+r.getSource()+"   "+"destination: "+r.getDestination());
+				Database.getUserBySource(area);
+				ridesCounter++;
+				}
+		}
+		if (ridesCounter==0) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 	
@@ -61,7 +71,7 @@ public class Driver extends User{
 		favouriteArea.add(Area);              //add area to the fav areas
 	}
 	public void offer(double price) {
-		
+		Offer offer = new Offer(this, price);
 	}
 
 	public String getId() {
@@ -99,6 +109,9 @@ public class Driver extends User{
 		Rate r=new Rate(username,rate);
 		allRating.add(r);
 	}
+	public void setRate(Rate rate) {
+		allRating.add(rate);
+	}
 	public double getRate() {
 		return rate;
 	}
@@ -127,7 +140,6 @@ public class Driver extends User{
 		}
 		System.out.println(r/allRating.size());
 	}
-
 	@Override
 	public String toString() {
 		return "Driver{" +
@@ -142,6 +154,6 @@ public class Driver extends User{
 				", Email='" + Email + '\'' +
 				", phone='" + phone + '\'' +
 				", active=" + active +
-				'}';
+				'}'+"\n";
 	}
 }
