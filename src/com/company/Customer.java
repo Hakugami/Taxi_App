@@ -16,6 +16,12 @@ public class Customer extends User {
     
     public void chooseOffer(){
 			Scanner input=new Scanner(System.in);
+			if(myRide==null)
+			{
+				System.out.println("there is no offers yet");
+				return;
+			}
+
 			if(myRide.listOffers()) {
 				System.out.println("0-exit");
 				System.out.println("choose your desired offer");
@@ -25,6 +31,7 @@ public class Customer extends User {
 				}
 				myRide.getOffer(choice);
 			}
+
     }
     public void addRate(double rate){
 			Rate customerRate= null;

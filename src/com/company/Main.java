@@ -124,7 +124,7 @@ public class Main {
                             			try {
                             			System.out.println(driver1.getDriverRide().getSource()+"-------->"+driver1.getDriverRide().getDestination());
                             			System.out.println(driver1.getDriverRide().getCustomer().getUserName());
-                            			System.out.println(driver1.getDriverRide().getPrice(driver1.getUserName())); //There is error in this line
+                            			System.out.println(driver1.getDriverRide().getPrice(driver1.getUserName()));
 
                             			}
                             			catch (Exception e) {

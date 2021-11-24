@@ -10,7 +10,14 @@ public class Ride {
 	private ArrayList<Offer> offers=new ArrayList<>();
 	private Offer selectedOffer;
 
-
+	public boolean isThereOffers()
+	{
+		if(offers.isEmpty())
+		{
+			return false;
+		}
+		return true;
+	}
 	public Ride(String source, String destination, Customer customer) {
 		this.source = source;
 		this.destination = destination;
@@ -60,12 +67,14 @@ public class Ride {
 		return selectedOffer;
 	}
 	public double getPrice(String driverName) {
+		double temp=0;
 		for (Offer offer:offers){
 			if(offer.getDriver().getUserName().equals(driverName)){
-				return offer.getPrice();
+				temp=offer.getPrice();
+				return temp;
 			}
 		}
-		return -1;
+		return temp;
 	}
 	public void setSelectedOffer(Offer selectedOffer) {
 		this.selectedOffer = selectedOffer;
