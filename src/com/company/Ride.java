@@ -9,14 +9,19 @@ public class Ride {
 	private Customer customer;
 	private ArrayList<Offer> offers=new ArrayList<>();
 	private Offer selectedOffer;
+	private double discount;
+
+	public double getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(double discount) {
+		this.discount = discount;
+	}
 
 	public boolean isThereOffers()
 	{
-		if(offers.isEmpty())
-		{
-			return false;
-		}
-		return true;
+		return !offers.isEmpty();
 	}
 	public Ride(String source, String destination, Customer customer) {
 		this.source = source;

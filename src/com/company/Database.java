@@ -1,17 +1,37 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class  Database {
+public class  Database  {
 
     private static final ArrayList<Customer> allUsers=new ArrayList<>();
     private static final ArrayList<Driver> allDrivers= new ArrayList<>();
     private static final ArrayList<Ride> allRides=new ArrayList<>();
     private static final ArrayList<Driver> driversRequests=new ArrayList<>();
+    public static Map<String,Double> areaDiscounts =new HashMap<>();
 
+    private static final Database instance=new Database();//singleton
 
+    private Database() {}
 
-    public static boolean verify(String user,String pass){
+    public static Database getInstance() {
+        return instance;
+    }
+
+    public static String getAreaDiscounts(String area){
+        String result;
+        for(String area1: areaDiscounts.keySet()){
+            if(area.equals(area1)){
+               result= String.valueOf(areaDiscounts.get(area1));
+               return result;
+            }
+        }
+        return null;
+    }
+
+    public static boolean verify(String user, String pass){
         for (User user1:allUsers) {
             if(user1.getUserName().equals(user)&&user1.getPassword().equals(pass)){
                 System.out.println("You have logged in successfully");

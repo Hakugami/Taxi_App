@@ -1,11 +1,25 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
+
+import java.util.*;
 
 public class Admin extends Person {
     public static ArrayList<Driver> allRequests=new ArrayList<>();
+
+    public static boolean setDiscounts(String area,Double value){
+        for(String area1:Database.areaDiscounts.keySet()){
+            if (area.equals(area1)){
+                return false;
+            }
+            else{
+                Database.areaDiscounts.put(area,value);
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     public static void getDriversRequests(Driver driver){
         allRequests.add(driver);
