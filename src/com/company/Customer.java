@@ -18,7 +18,7 @@ public class Customer extends User {
 			Scanner input=new Scanner(System.in);
 			if(myRide==null)
 			{
-				System.out.println("there is no offers yet");
+				System.out.println("there are no offers yet");
 				return;
 			}
 
@@ -30,6 +30,7 @@ public class Customer extends User {
 					return;
 				}
 				myRide.getOffer(choice);
+				myRide.log("Customer accepted offer",this);
 			}
 
     }

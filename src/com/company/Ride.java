@@ -1,6 +1,9 @@
 package com.company;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Ride {
@@ -10,6 +13,33 @@ public class Ride {
 	private ArrayList<Offer> offers=new ArrayList<>();
 	private Offer selectedOffer;
 	private double discount;
+
+	public void log(String event,Person actor){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		StringBuilder stringBuilder=new StringBuilder();
+		if(actor instanceof Driver){
+			stringBuilder.append(dtf.format(now)).append("--->"+event+": ").append(actor.getUserName());
+			Database.saveLogs(stringBuilder.toString());
+		}
+		else{
+			stringBuilder.append(dtf.format(now)).append("--->"+event+": ").append(customer.getUserName());
+			Database.saveLogs(stringBuilder.toString());
+			log("Driver has reached the user location");
+			log("Driver has reached his destination");
+		}
+
+	}
+	public void log(String event){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDateTime now = LocalDateTime.now();
+		StringBuilder stringBuilder=new StringBuilder();
+		Random random=new Random();
+		stringBuilder.append(dtf.format(now)+random.nextInt(10)).append("--->"+event+": ").append(selectedOffer.getDriver().getUserName())
+				.append(" "+customer.getUserName());
+
+		Database.saveLogs(stringBuilder.toString());
+	}
 
 	public double getDiscount() {
 		return discount;

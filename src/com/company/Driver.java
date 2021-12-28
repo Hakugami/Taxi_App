@@ -36,6 +36,7 @@ public class Driver extends User{
 	public void setOffer(Ride ride,double price) {
 		Offer offer = new Offer(this, price);
 		ride.getOffers().add(offer);
+		ride.log("Captain added offer price",this);
 	}
 	public boolean register(String user, String pass, String Email,String phone,String id, String licence){
 		this.register(user,pass,Email,phone);
@@ -60,12 +61,7 @@ public class Driver extends User{
 				ridesCounter++;
 				}
 		}
-		if (ridesCounter==0) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		return ridesCounter != 0;
 	}
 	
 	

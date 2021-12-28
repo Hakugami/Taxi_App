@@ -5,8 +5,18 @@ import java.util.*;
 
 public class Admin extends Person {
     public static ArrayList<Driver> allRequests=new ArrayList<>();
+    private static final ArrayList<String> logs=new ArrayList<>();
 
-    public static boolean setDiscounts(String area,Double value){
+    public static void storeLogs(String log){
+        logs.add(log);
+    }
+    public void showLogs(){
+        for(String string:logs){
+            System.out.println(string);
+        }
+    }
+
+    public  boolean setDiscounts(String area,Double value){
         for(String area1:Database.areaDiscounts.keySet()){
             if (area.equals(area1)){
                 return false;

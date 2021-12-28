@@ -20,6 +20,10 @@ public class  Database  {
         return instance;
     }
 
+    public static void saveLogs(String log){
+        Admin.storeLogs(log);
+    }
+
     public static String getAreaDiscounts(String area){
         String result;
         for(String area1: areaDiscounts.keySet()){

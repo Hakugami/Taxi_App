@@ -158,12 +158,13 @@ public class Main {
                 }
                 case 4 -> {
                     int choiceA = 0;
-                    while (choiceA != 3) {
-                        System.out.println("1-Review drivers requests\n2-Suspend\n3-log-out");
+                    while (choiceA != 4) {
+                        System.out.println("1-Review drivers requests\n2-Suspend\n3-show logs\n4-log out");
                         choiceA = scannerInt.nextInt();
                         switch (choiceA) {
                             case 1 -> admin.reviewRequests();
                             case 2 -> admin.suspend();
+                            case 3 -> admin.showLogs();
                         }
                     }
                 }
