@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-public class Driver extends User{
+public class Driver extends User implements driverAndRideObserver{
 	protected String id;
 	protected String licence;
 	protected double rate;
@@ -153,5 +153,9 @@ public class Driver extends User{
 				", phone='" + phone + '\'' +
 				", active=" + active +
 				'}'+"\n";
+	}
+	@Override
+	public void update(Ride ride) {
+		setDriverRide(ride);
 	}
 }

@@ -5,8 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Vector;
 
-public class Ride {
+public class Ride implements rideSub{
 	private String source;
 	private String destination;
 	private Customer customer;
@@ -139,4 +140,28 @@ public class Ride {
 
 	}
 
+	Vector<driverAndRideObserver> obsSub;
+	@Override
+	public void subscribe(driverAndRideObserver ob) {
+		obsSub.add(ob);
+	}
+	@Override
+	public void unsubscribe(driverAndRideObserver ob) {
+		for (int i=0; i < obsSub.size() ; i++){
+			if (obsSub.elementAt(i) == ob){
+				obsSub.remove(obsSub.elementAt(i));
+			}
+		}
+	}
+
+
+	@Override
+	public void Notify() {
+		//.setDriverRide(this);
+		for (int i=0; i < obsSub.size() ; i++){
+			if (selectedOffer .getDriver() == obsSub.elementAt(i)) {
+				obsSub.elementAt(i).update(this);
+			}
+		}
+	}
 }
