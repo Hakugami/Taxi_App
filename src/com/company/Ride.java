@@ -160,8 +160,10 @@ public class Ride implements rideSub{
 	public void Notify() {
 		//.setDriverRide(this);
 		for (int i=0; i < obsSub.size() ; i++){
-			if (selectedOffer .getDriver() == obsSub.elementAt(i)) {
-				obsSub.elementAt(i).update(this);
+			if(!selectedOffer.getDriver().isBusy&&this.selectedOffer.getDriver().currentLocation.equals(source)){
+				if (selectedOffer .getDriver() == obsSub.elementAt(i)) {
+					obsSub.elementAt(i).update(this);
+				}
 			}
 		}
 	}
