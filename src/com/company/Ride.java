@@ -14,6 +14,7 @@ public class Ride implements rideSub{
 	private ArrayList<Offer> offers=new ArrayList<>();
 	private Offer selectedOffer;
 	private double discount;
+	private int numOfPeople;
 
 	public void log(String event,Person actor){
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

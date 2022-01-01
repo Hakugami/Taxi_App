@@ -12,6 +12,8 @@ public class Driver extends User implements driverAndRideObserver{
 	protected ArrayList<Rate> allRating = new ArrayList<>();
 	protected Ride driverRide = null;
 	protected static int ridesCounter = 0;
+	protected String currentLocation;
+	protected boolean isBusy=false;
 
 
 	public void setDriverRide(Ride driverRide) {
@@ -63,8 +65,23 @@ public class Driver extends User implements driverAndRideObserver{
 		}
 		return ridesCounter != 0;
 	}
-	
-	
+
+	public String getCurrentLocation() {
+		return currentLocation;
+	}
+
+	public void setCurrentLocation(String currentLocation) {
+		this.currentLocation = currentLocation;
+	}
+
+	public boolean isBusy() {
+		return isBusy;
+	}
+
+	public void setBusy(boolean busy) {
+		isBusy = busy;
+	}
+
 	public void addArea(String Area) {
 		favouriteArea.add(Area);              //add area to the fav areas
 	}
