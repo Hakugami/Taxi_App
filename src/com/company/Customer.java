@@ -11,8 +11,9 @@ public class Customer extends User {
     boolean firstRide=false;
 
 
-    public void requestRide (String source,String destination,String date){
+    public void requestRide (String source,String destination,String date,int numOfPass){
         Ride r=new Ride(source,destination,this);//leave this, remove the rest
+        r.numOfPeople=numOfPass;
         r.date=date;
         Database.getAllRides().add(r);//this too
         myRide=r;// added this to see his ride
