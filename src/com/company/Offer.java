@@ -2,16 +2,18 @@ package com.company;
 
 public class Offer {
     private Driver driver;
-    private double price;
+    private double price=0;
+    private double mainPrice;
     private String Details;
-    
-    
-    public Offer(Driver driver, double price) {
-		this.driver = driver;
-		this.price = price;
-	}
 
-	public Driver getDriver() {
+
+    public Offer(Driver driver, double price) {
+        this.driver = driver;
+        this.price = price;
+        mainPrice=price;
+    }
+
+    public Driver getDriver() {
         return driver;
     }
 
@@ -26,6 +28,8 @@ public class Offer {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
 
     public String getDetails() {
         return Details;
