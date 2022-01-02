@@ -36,7 +36,7 @@ public class Driver extends User implements driverAndRideObserver{
 
     }
     public void setOffer(Ride ride,double price) {
-        Offer offer = new Offer(this, ride.getDiscount()+price);
+        Offer offer = new Offer(this, price);
         ride.getOffers().add(offer);
         ride.log("Captain added offer price",this);
     }
