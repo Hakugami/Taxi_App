@@ -11,6 +11,7 @@ public class  Database  {
     private static final ArrayList<Ride> allRides=new ArrayList<>();
     private static final ArrayList<Driver> driversRequests=new ArrayList<>();
     public static Map<String,Double> areaDiscounts =new HashMap<>();
+    private static final ArrayList<String> PublicHoliday=new ArrayList<>();
 
     private static final Database instance=new Database();//singleton
 
@@ -28,8 +29,8 @@ public class  Database  {
         String result;
         for(String area1: areaDiscounts.keySet()){
             if(area.equals(area1)){
-               result= String.valueOf(areaDiscounts.get(area1));
-               return result;
+                result= String.valueOf(areaDiscounts.get(area1));
+                return result;
             }
         }
         return null;
@@ -80,12 +81,12 @@ public class  Database  {
         return null;
     }
     public static void getUserBySource(String source) {
-    	for (Ride ride:allRides){
+        for (Ride ride:allRides){
             if(ride.getSource().equals(source)){
-            	System.out.println("Customer: "+ride.getCustomer().userName+"    "+ride.getCustomer().Email);
+                System.out.println("Customer: "+ride.getCustomer().userName+"    "+ride.getCustomer().Email);
             }
-    	}
-     }
+        }
+    }
 
     public static boolean addDriver(Driver driver){
         if(allDrivers.contains(driver)){
@@ -110,9 +111,22 @@ public class  Database  {
     }
 
 
-
-
-
+    public static void addHolidays(){
+        PublicHoliday.add("1/1");
+        PublicHoliday.add("22/3");
+        PublicHoliday.add("2/4");
+        PublicHoliday.add("27/4");
+        PublicHoliday.add("1/5");
+        PublicHoliday.add("16/6");
+        PublicHoliday.add("9/8");
+        PublicHoliday.add("24/9");
+        PublicHoliday.add("16/12");
+        PublicHoliday.add("25/12");
+    }
+    public static ArrayList<String> getAllHolidays(){
+        addHolidays();
+        return PublicHoliday;
+    }
     public static ArrayList<Customer> getAllUsers() {
         return allUsers;
     }
