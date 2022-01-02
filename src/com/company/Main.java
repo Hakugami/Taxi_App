@@ -78,7 +78,9 @@ public class Main {
                                         String source = scannerStr.nextLine();
                                         System.out.println("Enter destination");
                                         String dest = scannerStr.nextLine();
-                                        customer1.requestRide(source, dest,date);
+                                        System.out.println("Enter number of passengers");
+                                        int numOfPassenger = scannerInt.nextInt();
+                                        customer1.requestRide(source, dest,date,numOfPassenger);
                                     }
                                     case 2 -> {
                                         customer1.chooseOffer();
