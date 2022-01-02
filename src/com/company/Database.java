@@ -12,7 +12,7 @@ public class  Database  {
     private static final ArrayList<Driver> driversRequests=new ArrayList<>();
     public static Map<String,Double> areaDiscounts =new HashMap<>();
     private static final ArrayList<String> PublicHoliday=new ArrayList<>();
-
+    static int counter = 1;
     private static final Database instance=new Database();//singleton
 
     private Database() {}
@@ -124,8 +124,20 @@ public class  Database  {
         PublicHoliday.add("25/12");
     }
     public static ArrayList<String> getAllHolidays(){
-        addHolidays();
         return PublicHoliday;
+    }
+
+    public static boolean checkHoliday(String date){
+        if (counter==1){
+            addHolidays();
+            counter++;
+        }
+
+        for (String holiday : PublicHoliday){
+            if (date.equals(holiday))
+                return true;
+        }
+        return false;
     }
     public static ArrayList<Customer> getAllUsers() {
         return allUsers;
