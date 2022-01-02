@@ -35,7 +35,7 @@ public class Customer extends User {
                 return;
             }
             String date = getDate();
-            checkDiscount(date);
+            //checkDiscount(date);
             myRide.getOffer(choice);
             myRide.listOffers();//
             myRide.incrementNumOfPeople();
@@ -64,22 +64,24 @@ public class Customer extends User {
         return false;
     }
     public void checkDiscount(String date){
+        myRide.setDiscount(0);
         if (birthDate.equals(date)) {
-            myRide.setDiscount(10);
+            myRide.setDiscount(myRide.getDiscount()+ 10);
         }
-        else if (checkFirstRide()){
-            myRide.setDiscount(10);
+        if (checkFirstRide()){
+            myRide.setDiscount(myRide.getDiscount()+10);
         }
-        else if (myRide.getNumOfPeople()==2){
-            myRide.setDiscount(5);
+        if (myRide.getNumOfPeople()==2){
+            myRide.setDiscount(myRide.getDiscount()+5);
         }
-        else {
-            for (String holiday : Database.getAllHolidays()){
+
+        if (Database.checkHoliday(date)) {
+            for (String holiday : Database.getAllHolidays()) {
                 if (date.equals(holiday))
-                    myRide.setDiscount(5);
+                    myRide.setDiscount(myRide.getDiscount() + 5);
             }
         }
-        }
+    }
         public void setDate(String date){
         this.myRide.date=date;
         }
