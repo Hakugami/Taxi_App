@@ -1,7 +1,12 @@
 package com.company;
 
-public abstract class User extends Person {
+import javax.swing.text.DateFormatter;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
+public abstract class User extends Person {
+    String birthDate;   //to apply discount
     public boolean active=true;
 
     public User() {
@@ -9,11 +14,12 @@ public abstract class User extends Person {
     }
 
 
-    public boolean register(String user, String pass, String Email,String phone){
+    public boolean register(String user, String pass, String Email,String phone,String bDate){
         this.setUserName(user);
         this.setPassword(pass);
         this.setEmail(Email);
         this.setPhone(phone);
+        this.setBirthDate(bDate);
         if (!(this instanceof Driver)) {
             Database.addUser((Customer) this);
         }
@@ -35,5 +41,13 @@ public abstract class User extends Person {
 
     public User(String userName, String password, String email) {
         super(userName, password, email);
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public String getBirthDate() {
+        return birthDate;
     }
 }
