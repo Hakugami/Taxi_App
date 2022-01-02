@@ -1,11 +1,13 @@
 package com.company;
 
+import java.util.Date;
 import java.util.Scanner;
-
 public class Main {
-
+    static final String date ="27/4";
     public static void main(String[] args) {
         while (true) {
+
+            System.out.println(date);
             System.out.println("\nWelcome to our taxi app\n---------------------------\n");
             Driver driver = new Driver();
             Customer customer = new Customer();
@@ -26,7 +28,9 @@ public class Main {
                     String Email = scannerStr.nextLine();
                     System.out.println("Enter your Phone: ");
                     String Phone = scannerStr.nextLine();
-                    customer.register(Username, Password, Email, Phone);
+                    System.out.println("Enter your birth date (dd/MM) :");
+                    String bDate = scannerStr.nextLine();
+                    customer.register(Username, Password, Email, Phone,bDate);
                 }
                 case 2 -> {
 
@@ -42,7 +46,9 @@ public class Main {
                     String ID = scannerStr.nextLine();
                     System.out.println("Enter your License ID: ");
                     String License = scannerStr.nextLine();
-                    driver.register(Username, Password, Email, Phone, ID, License);
+                    System.out.println("Enter your birth date (dd/MM) :");
+                    String bDate = scannerStr.nextLine();
+                    driver.register(Username, Password, Email, Phone, ID, License,bDate);
 
                 }
                 case 3 -> {
@@ -63,20 +69,20 @@ public class Main {
                                     System.out.println("You are currently suspended");
                                     break;
                                 }
-                            	System.out.println("1-Request a ride\n2-View current offers\n3-rate a driver\n4-Logout");
-                            	choiceC = scannerInt.nextInt();
-                            	assert customer1 != null;
-                            	switch (choiceC) {
-                            		case 1 -> {
-                            			System.out.println("Enter source");
-	                                    String source = scannerStr.nextLine();
-	                                    System.out.println("Enter destination");
-	                                    String dest = scannerStr.nextLine();
-	                                    customer1.requestRide(source, dest);
-                            		}
-                            		case 2 -> {
-                            			customer1.chooseOffer();
-                                }
+                                System.out.println("1-Request a ride\n2-View current offers\n3-rate a driver\n4-Logout");
+                                choiceC = scannerInt.nextInt();
+                                assert customer1 != null;
+                                switch (choiceC) {
+                                    case 1 -> {
+                                        System.out.println("Enter source");
+                                        String source = scannerStr.nextLine();
+                                        System.out.println("Enter destination");
+                                        String dest = scannerStr.nextLine();
+                                        customer1.requestRide(source, dest,date);
+                                    }
+                                    case 2 -> {
+                                        customer1.chooseOffer();
+                                    }
                                     case 3 ->{
                                         System.out.println("Rate your latest driver");
                                         System.out.println("Enter rating");
@@ -87,8 +93,8 @@ public class Main {
                                         catch (Exception e){
                                             System.out.println("No selected rides\n");
                                         }
+                                    }
                                 }
-                            }
 
                             }
                         }
@@ -108,45 +114,45 @@ public class Main {
                                 System.out.println("6-Logout");
                                 choiceD = scannerInt.nextInt();
                                 assert driver1 != null;
-                            	switch(choiceD) {
-                            		case 1 -> {
-                            			if (driver1.listRidesWithSourceArea()) {
-                            				driver1.chooseRide();
-                            				System.out.println("Set the offer");
-                            				double price=scannerDoub.nextDouble();
-                            				driver1.setOffer(driver1.chooseRide(),price);
-                            			}
-                            			else
-                            				System.out.println("There is no requests in your fav areas");
+                                switch(choiceD) {
+                                    case 1 -> {
+                                        if (driver1.listRidesWithSourceArea()) {
+                                            driver1.chooseRide();
+                                            System.out.println("Set the offer");
+                                            double price=scannerDoub.nextDouble();
+                                            driver1.setOffer(driver1.chooseRide(),price);
+                                        }
+                                        else
+                                            System.out.println("There is no requests in your fav areas");
 
-                            		}
-                            		case 2 -> {
-                            			try {
-                            			System.out.println(driver1.getDriverRide().getSource()+"-------->"+driver1.getDriverRide().getDestination());
-                            			System.out.println(driver1.getDriverRide().getCustomer().getUserName());
-                            			System.out.println(driver1.getDriverRide().getPrice(driver1.getUserName()));
+                                    }
+                                    case 2 -> {
+                                        try {
+                                            System.out.println(driver1.getDriverRide().getSource()+"-------->"+driver1.getDriverRide().getDestination());
+                                            System.out.println(driver1.getDriverRide().getCustomer().getUserName());
+                                            System.out.println(driver1.getDriverRide().getPrice(driver1.getUserName()));
 
-                            			}
-                            			catch (Exception e) {
-                            				System.out.println("Error");
-                            			}
-                            		}
-                            		case 3 -> {
-                            			driver1.getAllRating();
-                            			System.out.println(" ");
-                            			driver1.getAverageRating();
-                            		}
-                            		case 4 -> {
-                            			System.out.println("Enter the area you want to add");
-                            			String area = scannerStr.nextLine();
-                            			driver1.setFavouriteArea(area);
-                            		}
-                            		case 5 -> {
-                            			driver1.getFavouriteArea();
-                            		}
+                                        }
+                                        catch (Exception e) {
+                                            System.out.println("Error");
+                                        }
+                                    }
+                                    case 3 -> {
+                                        driver1.getAllRating();
+                                        System.out.println(" ");
+                                        driver1.getAverageRating();
+                                    }
+                                    case 4 -> {
+                                        System.out.println("Enter the area you want to add");
+                                        String area = scannerStr.nextLine();
+                                        driver1.setFavouriteArea(area);
+                                    }
+                                    case 5 -> {
+                                        driver1.getFavouriteArea();
+                                    }
 
 
-                            	}
+                                }
 
                             }
 
