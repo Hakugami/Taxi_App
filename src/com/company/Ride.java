@@ -67,11 +67,13 @@ public class Ride implements rideSub{
         this.source = source;
         this.destination = destination;
         this.customer = customer;
+        numOfPeople++;
     }
     public Ride(String source, String destination, Customer customer,Driver driver) {
         this.source = source;
         this.destination = destination;
         this.customer = customer;
+        numOfPeople++;
 
     }
     public Ride(String source) {
@@ -158,8 +160,9 @@ public class Ride implements rideSub{
         }
     }
     public void getOffer(int selectOffer){
-        customer.checkDiscount(date);
-        setSelectedOfferWithDiscount(offers.get(selectOffer-1));
+        discount=0;
+        //customer.checkDiscount(date);
+        //setSelectedOfferWithDiscount(offers.get(selectOffer-1));
         selectedOffer= offers.get(selectOffer-1);
         this.selectedOffer.getDriver().setDriverRide(this);
         Database.getAllRides().remove(this);
